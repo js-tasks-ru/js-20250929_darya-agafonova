@@ -5,7 +5,7 @@
  * @returns {string[]}
  */
 export function sortStrings(arr, param = 'asc') {
-  let uniqueArr = Array.from(new Set(arr));
+  let uniqueArr = [...arr];
   if (param === "asc") {
     uniqueArr.sort(function (a, b) {
       return a.localeCompare(b, ["ru", "en"], {caseFirst: "upper"});
