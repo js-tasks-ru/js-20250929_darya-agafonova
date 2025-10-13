@@ -51,8 +51,6 @@ export default class ColumnChart {
       template = this.getColumnProps(this.data).map(({value, percent}) => (
         `<div style="--value: ${value}" data-tooltip="${percent}"></div>`
       )).join('');
-    } else {
-      template = `<img src="charts-skeleton.svg" alt="Данные загружаются">`;
     }
     return template;
   }
