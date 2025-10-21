@@ -3,6 +3,7 @@ export default class NotificationMessage {
   message;
   duration;
   type;
+  timerId;
   element = document.createElement('div');
 
   constructor(message, props = {}) {
@@ -46,19 +47,22 @@ export default class NotificationMessage {
 
     let currentElement = element || document.body;
     currentElement.append(this.element);
+    this.timerId = setTimeout(() => this.hide(), this.duration);
+  }
+
+  hide() {
+    clearTimeout(this.timerId);
     this.remove();
   }
 
   remove() {
-    setTimeout(() => this.element.remove(), this.duration);
+    this.element.remove();
   }
 
   destroy() {
     if (NotificationMessage.currentNote === this) {
       NotificationMessage.currentNote = null;
     }
-    this.element.remove();
+    this.hide();
   }
-
-
 }
