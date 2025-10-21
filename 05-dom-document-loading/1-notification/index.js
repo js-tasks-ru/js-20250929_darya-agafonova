@@ -1,4 +1,5 @@
 export default class NotificationMessage {
+  static currentNote;
   message;
   duration;
   type;
@@ -38,6 +39,11 @@ export default class NotificationMessage {
   }
 
   show(element) {
+    if (NotificationMessage.currentNote) {
+      NotificationMessage.currentNote.remove();
+    }
+    NotificationMessage.currentNote = this;
+
     let currentElement = element || document.body;
     currentElement.append(this.element);
     this.remove();
@@ -48,6 +54,9 @@ export default class NotificationMessage {
   }
 
   destroy() {
+    if (NotificationMessage.currentNote === this) {
+      NotificationMessage.currentNote = null;
+    }
     this.element.remove();
   }
 
